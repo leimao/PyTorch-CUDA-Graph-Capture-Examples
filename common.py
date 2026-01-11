@@ -5,6 +5,7 @@ This module contains shared model definitions and training functions used
 across different CUDA graph demonstration scripts.
 """
 
+import os
 import torch
 import torch.nn as nn
 from torch.profiler import profile, ProfilerActivity, schedule, record_function
@@ -144,6 +145,11 @@ def create_profiler():
 
 def save_and_print_profile(prof, trace_file, scenario_name):
     """Save profiling trace and print summary."""
+    # Create directory if it doesn't exist
+    trace_dir = os.path.dirname(trace_file)
+    if trace_dir and not os.path.exists(trace_dir):
+        os.makedirs(trace_dir)
+
     prof.export_chrome_trace(trace_file)
     print(f"Profiling trace saved to: {trace_file}")
     print()

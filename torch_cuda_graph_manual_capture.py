@@ -90,6 +90,9 @@ def main():
     print(f"Using device: {torch.cuda.get_device_name(0)}")
     print()
 
+    # Configuration
+    trace_dir = "traces"  # Directory for trace files
+
     # Model setup and data generation
     config, real_inputs, real_targets = setup_model_and_data(device)
 
@@ -117,7 +120,7 @@ def main():
                                  profiler=prof_no_graph)
 
     # Save profiling trace and print summary
-    trace_file_no_graph = "trace_without_manual_capture.json"
+    trace_file_no_graph = trace_dir + "/" + "trace_without_manual_capture.json"
     save_and_print_profile(prof_no_graph, trace_file_no_graph,
                            "without CUDA graph")
 
@@ -153,7 +156,7 @@ def main():
                               profiler=prof_with_graph)
 
     # Save profiling trace and print summary
-    trace_file_with_graph = "trace_with_manual_capture.json"
+    trace_file_with_graph = trace_dir + "/" + "trace_with_manual_capture.json"
     save_and_print_profile(prof_with_graph, trace_file_with_graph,
                            "with CUDA graph")
 

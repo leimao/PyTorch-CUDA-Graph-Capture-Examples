@@ -36,25 +36,25 @@ SCENARIO 1: Training WITHOUT CUDA Graph
 Training WITHOUT CUDA graph...
   Completed 10 iterations.
 
-Profiling trace saved to: trace_without_manual_capture.json
+Profiling trace saved to: traces/trace_without_manual_capture.json
 
 Top 10 operations by CUDA time (without CUDA graph):
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-                                     ## forward_pass ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.758ms        61.90%       3.758ms     536.862us           0 B           0 B           0 B           0 B             7
-    autograd::engine::evaluate_function: AddmmBackward0         1.87%     431.461us        14.04%       3.248ms     115.994us       0.000us         0.00%       2.966ms     105.914us           0 B           0 B     231.98 MB    -126.88 MB            28
-                                          ProfilerStep*         3.03%     700.822us        74.69%      17.280ms       2.469ms       0.000us         0.00%       2.962ms     423.154us           0 B           0 B           0 B           0 B             7
-                                         AddmmBackward0         1.30%     300.029us         9.45%       2.187ms      78.118us       0.000us         0.00%       2.713ms      96.892us           0 B           0 B     358.75 MB           0 B            28
-                                               aten::mm         4.38%       1.012ms         5.90%       1.365ms      27.852us       2.713ms        44.68%       2.713ms      55.367us           0 B           0 B     358.75 MB     358.75 MB            49
-                                     ## forward_pass ##         7.38%       1.708ms        19.97%       4.619ms     659.893us       0.000us         0.00%       2.059ms     294.211us           0 B           0 B     137.81 MB     -65.62 MB             7
-                                           aten::linear         0.44%     102.551us         6.45%       1.492ms      53.268us       0.000us         0.00%       1.947ms      69.537us           0 B           0 B      65.62 MB           0 B            28
-                                            aten::addmm         3.78%     873.558us         4.93%       1.142ms      40.771us       1.947ms        32.07%       1.947ms      69.537us           0 B           0 B      65.62 MB      65.62 MB            28
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.786ms        29.42%       1.786ms     127.583us           0 B           0 B           0 B           0 B            14
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.590ms        26.18%       1.590ms     227.072us           0 B           0 B           0 B           0 B             7
+                                     ## forward_pass ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.624ms        59.56%       3.624ms     517.737us           0 B           0 B           0 B           0 B             7
+                                          ProfilerStep*         3.22%     778.095us        74.15%      17.902ms       2.557ms       0.000us         0.00%       2.978ms     425.435us           0 B           0 B           0 B           0 B             7
+    autograd::engine::evaluate_function: AddmmBackward0         1.91%     461.482us        14.53%       3.509ms     125.313us       0.000us         0.00%       2.971ms     106.111us           0 B           0 B     231.98 MB    -126.88 MB            28
+                                         AddmmBackward0         1.31%     317.453us         9.84%       2.375ms      84.836us       0.000us         0.00%       2.717ms      97.051us           0 B           0 B     358.75 MB           0 B            28
+                                               aten::mm         4.52%       1.091ms         6.09%       1.470ms      29.999us       2.717ms        44.66%       2.717ms      55.458us           0 B           0 B     358.75 MB     358.75 MB            49
+                                     ## forward_pass ##         7.00%       1.691ms        18.60%       4.491ms     641.548us       0.000us         0.00%       2.069ms     295.579us           0 B           0 B     137.81 MB     -65.62 MB             7
+                                           aten::linear         0.40%      96.651us         5.85%       1.413ms      50.447us       0.000us         0.00%       1.951ms      69.673us           0 B           0 B      65.62 MB           0 B            28
+                                            aten::addmm         3.45%     832.270us         4.48%       1.080ms      38.587us       1.951ms        32.06%       1.951ms      69.673us           0 B           0 B      65.62 MB      65.62 MB            28
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.791ms        29.43%       1.791ms     127.895us           0 B           0 B           0 B           0 B            14
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.593ms        26.19%       1.593ms     227.621us           0 B           0 B           0 B           0 B             7
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 23.134ms
-Self CUDA time total: 6.072ms
+Self CPU time total: 24.142ms
+Self CUDA time total: 6.085ms
 
 
 ======================================================================
@@ -68,32 +68,32 @@ CUDA graph ready.
   Training with graph replay...
   Completed 10 iterations.
 
-Profiling trace saved to: trace_with_manual_capture.json
+Profiling trace saved to: traces/trace_with_manual_capture.json
 
 Top 10 operations by CUDA time (with CUDA graph):
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem    # of Calls
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-                                     ## graph.replay ##         0.00%       0.000us         0.00%       0.000us       0.000us       6.075ms        79.14%       6.075ms     867.848us           0 B           0 B             7
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.048ms        26.69%       2.048ms     120.490us           0 B           0 B            17
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.986ms        25.87%       1.986ms     220.677us           0 B           0 B             9
-void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us       1.098ms        14.30%       1.098ms     121.974us           0 B           0 B             9
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     571.057us         7.44%     571.057us      63.451us           0 B           0 B             9
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     454.614us         5.92%     454.614us      50.513us           0 B           0 B             9
-void at::native::reduce_kernel<128, 4, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us     321.722us         4.19%     321.722us       8.937us           0 B           0 B            36
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     206.010us         2.68%     206.010us      11.445us           0 B           0 B            18
-                         Memcpy DtoD (Device -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us     182.014us         2.37%     182.014us      11.376us           0 B           0 B            16
-                                          ProfilerStep*         4.62%     354.888us        20.97%       1.610ms     230.054us       0.000us         0.00%     169.728us      24.247us           0 B           0 B             7
+                                     ## graph.replay ##         0.00%       0.000us         0.00%       0.000us       0.000us       6.564ms        76.16%       6.564ms     937.756us           0 B           0 B             7
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.663ms        30.89%       2.663ms     295.836us           0 B           0 B             9
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       2.061ms        23.91%       2.061ms     121.242us           0 B           0 B            17
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us       1.172ms        13.59%       1.172ms     130.176us           0 B           0 B             9
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     573.472us         6.65%     573.472us      63.719us           0 B           0 B             9
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     456.896us         5.30%     456.896us      50.766us           0 B           0 B             9
+void at::native::reduce_kernel<128, 4, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us     333.825us         3.87%     333.825us       9.273us           0 B           0 B            36
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     226.624us         2.63%     226.624us      25.180us           0 B           0 B             9
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     205.058us         2.38%     205.058us      11.392us           0 B           0 B            18
+                         Memcpy DtoD (Device -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us     169.183us         1.96%     169.183us      10.574us           0 B           0 B            16
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 7.680ms
-Self CUDA time total: 7.676ms
+Self CPU time total: 8.690ms
+Self CUDA time total: 8.619ms
 
 
 ======================================================================
 Profiling completed successfully!
 View traces in Chrome: chrome://tracing
-  - trace_without_manual_capture.json
-  - trace_with_manual_capture.json
+  - traces/trace_without_manual_capture.json
+  - traces/trace_with_manual_capture.json
 ======================================================================
 ```
 
@@ -117,25 +117,25 @@ SCENARIO 1: Training WITHOUT CUDA Graph
 Training WITHOUT CUDA graph...
   Completed 10 iterations.
 
-Profiling trace saved to: trace_without_make_graphed_callables.json
+Profiling trace saved to: traces/trace_without_make_graphed_callables.json
 
 Top 10 operations by CUDA time (without CUDA graph):
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-                                     ## forward_pass ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.774ms        62.24%       3.774ms     539.116us           0 B           0 B           0 B           0 B             7
-                                          ProfilerStep*         3.17%     782.500us        74.41%      18.366ms       2.624ms       0.000us         0.00%       2.964ms     423.444us           0 B           0 B           0 B           0 B             7
-    autograd::engine::evaluate_function: AddmmBackward0         1.92%     474.130us        14.28%       3.525ms     125.904us       0.000us         0.00%       2.962ms     105.785us           0 B           0 B     231.98 MB    -126.88 MB            28
-                                         AddmmBackward0         1.35%     334.266us         9.64%       2.378ms      84.944us       0.000us         0.00%       2.707ms      96.676us           0 B           0 B     358.75 MB           0 B            28
-                                               aten::mm         4.45%       1.099ms         5.98%       1.475ms      30.105us       2.707ms        44.64%       2.707ms      55.243us           0 B           0 B     358.75 MB     358.75 MB            49
-                                     ## forward_pass ##         6.93%       1.709ms        18.72%       4.621ms     660.119us       0.000us         0.00%       2.060ms     294.349us           0 B           0 B     137.81 MB     -65.62 MB             7
-                                           aten::linear         0.42%     104.014us         5.96%       1.472ms      52.566us       0.000us         0.00%       1.947ms      69.545us           0 B           0 B      65.62 MB           0 B            28
-                                            aten::addmm         3.51%     865.235us         4.55%       1.124ms      40.150us       1.947ms        32.11%       1.947ms      69.545us           0 B           0 B      65.62 MB      65.62 MB            28
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.786ms        29.46%       1.786ms     127.600us           0 B           0 B           0 B           0 B            14
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.585ms        26.14%       1.585ms     226.432us           0 B           0 B           0 B           0 B             7
+                                     ## forward_pass ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.786ms        62.30%       3.786ms     540.851us           0 B           0 B           0 B           0 B             7
+                                          ProfilerStep*         3.20%     725.602us        75.51%      17.097ms       2.442ms       0.000us         0.00%       2.974ms     424.860us           0 B           0 B           0 B           0 B             7
+    autograd::engine::evaluate_function: AddmmBackward0         1.84%     416.249us        13.71%       3.104ms     110.858us       0.000us         0.00%       2.973ms     106.185us           0 B           0 B     231.98 MB    -126.88 MB            28
+                                         AddmmBackward0         1.25%     282.658us         9.21%       2.085ms      74.461us       0.000us         0.00%       2.722ms      97.223us           0 B           0 B     358.75 MB           0 B            28
+                                               aten::mm         4.27%     967.644us         5.73%       1.297ms      26.465us       2.722ms        44.79%       2.722ms      55.556us           0 B           0 B     358.75 MB     358.75 MB            49
+                                     ## forward_pass ##         7.58%       1.717ms        20.62%       4.669ms     667.061us       0.000us         0.00%       2.069ms     295.561us           0 B           0 B     137.81 MB     -65.62 MB             7
+                                           aten::linear         0.46%     103.960us         6.63%       1.502ms      53.640us       0.000us         0.00%       1.956ms      69.849us           0 B           0 B      65.62 MB           0 B            28
+                                            aten::addmm         3.89%     879.966us         5.10%       1.155ms      41.243us       1.956ms        32.18%       1.956ms      69.849us           0 B           0 B      65.62 MB      65.62 MB            28
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.795ms        29.53%       1.795ms     128.192us           0 B           0 B           0 B           0 B            14
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.597ms        26.28%       1.597ms     228.169us           0 B           0 B           0 B           0 B             7
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 24.681ms
-Self CUDA time total: 6.064ms
+Self CPU time total: 22.641ms
+Self CUDA time total: 6.077ms
 
 
 ======================================================================
@@ -149,32 +149,32 @@ CUDA graph ready.
   Training with graph replay...
   Completed 10 iterations.
 
-Profiling trace saved to: trace_with_make_graphed_callables.json
+Profiling trace saved to: traces/trace_with_make_graphed_callables.json
 
 Top 10 operations by CUDA time (with CUDA graph):
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-                                          ProfilerStep*         6.10%     718.675us        82.79%       9.751ms       1.393ms       0.000us         0.00%       3.102ms     443.182us           0 B           0 B           0 B           0 B             7
-autograd::engine::evaluate_function: GraphedBackward...         1.61%     189.637us         9.05%       1.066ms     152.244us       0.000us         0.00%       3.036ms     433.687us           0 B           0 B      -4.38 MB      -4.38 MB             7
-                                        GraphedBackward         4.05%     476.912us         7.17%     844.867us     120.695us       3.027ms        48.18%       3.036ms     433.687us           0 B           0 B           0 B           0 B             7
-                             ## forward_pass_graphed ##         0.00%       0.000us         0.00%       0.000us       0.000us       2.401ms        38.20%       2.401ms     342.951us           0 B           0 B           0 B           0 B             7
-                             ## forward_pass_graphed ##         5.21%     613.647us        12.03%       1.416ms     202.357us       0.000us         0.00%       2.193ms     313.274us           0 B           0 B           0 B           0 B             7
-                                                Graphed         2.90%     341.638us         6.82%     802.849us     114.693us       2.054ms        32.68%       2.193ms     313.274us           0 B           0 B           0 B           0 B             7
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.768ms        28.14%       1.768ms     126.290us           0 B           0 B           0 B           0 B            14
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.549ms        24.65%       1.549ms     221.285us           0 B           0 B           0 B           0 B             7
-void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us     979.820us        15.59%     979.820us     122.477us           0 B           0 B           0 B           0 B             8
-                                   ## optimizer.step ##         2.99%     351.664us        13.78%       1.623ms     231.871us       0.000us         0.00%     858.414us     122.631us           0 B           0 B           0 B           0 B             7
+                                          ProfilerStep*         5.42%     620.940us        81.15%       9.292ms       1.327ms       0.000us         0.00%       3.128ms     446.854us           0 B           0 B           0 B           0 B             7
+autograd::engine::evaluate_function: GraphedBackward...         1.73%     197.721us         9.66%       1.106ms     157.971us       0.000us         0.00%       3.063ms     437.572us           0 B           0 B      -4.38 MB      -4.38 MB             7
+                                        GraphedBackward         4.24%     484.930us         7.65%     876.284us     125.183us       3.053ms        48.09%       3.063ms     437.572us           0 B           0 B           0 B           0 B             7
+                             ## forward_pass_graphed ##         0.00%       0.000us         0.00%       0.000us       0.000us       2.316ms        36.47%       2.316ms     330.794us           0 B           0 B           0 B           0 B             7
+                             ## forward_pass_graphed ##         4.92%     563.566us        11.65%       1.333ms     190.490us       0.000us         0.00%       2.192ms     313.103us           0 B           0 B           0 B           0 B             7
+                                                Graphed         2.76%     315.584us         6.72%     769.863us     109.980us       2.045ms        32.21%       2.192ms     313.103us           0 B           0 B           0 B           0 B             7
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.759ms        27.70%       1.759ms     125.641us           0 B           0 B           0 B           0 B            14
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.556ms        24.51%       1.556ms     222.281us           0 B           0 B           0 B           0 B             7
+void at::native::(anonymous namespace)::multi_tensor...         0.00%       0.000us         0.00%       0.000us       0.000us       1.017ms        16.02%       1.017ms     127.164us           0 B           0 B           0 B           0 B             8
+                                   ## optimizer.step ##         2.78%     318.836us        13.08%       1.498ms     214.023us       0.000us         0.00%     883.811us     126.259us           0 B           0 B           0 B           0 B             7
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 11.778ms
-Self CUDA time total: 6.284ms
+Self CPU time total: 11.450ms
+Self CUDA time total: 6.349ms
 
 
 ======================================================================
 Profiling completed successfully!
 View traces in Chrome: chrome://tracing
-  - trace_without_make_graphed_callables.json
-  - trace_with_make_graphed_callables.json
+  - traces/trace_without_make_graphed_callables.json
+  - traces/trace_with_make_graphed_callables.json
 ======================================================================
 
 ======================================================================
@@ -188,33 +188,33 @@ CUDA graph for block2 ready.
   Training with graph replay...
   Completed 10 iterations.
 
-Profiling trace saved to: trace_with_partial_make_graphed_callables.json
+Profiling trace saved to: traces/trace_with_partial_make_graphed_callables.json
 
 Top 10 operations by CUDA time (with partial CUDA graph - block2 only):
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg       CPU Mem  Self CPU Mem      CUDA Mem  Self CUDA Mem    # of Calls
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-                             ## forward_pass_graphed ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.347ms       101.31%       3.347ms     478.112us           0 B           0 B           0 B           0 B             7
-                                          ProfilerStep*         3.56%     709.723us        77.04%      15.376ms       2.197ms       0.000us         0.00%       2.271ms     324.414us           0 B           0 B           0 B           0 B             7
-                             ## forward_pass_graphed ##         7.86%       1.569ms        21.09%       4.209ms     601.300us       0.000us         0.00%       2.105ms     300.647us           0 B           0 B      69.56 MB     -88.38 MB             7
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.791ms        54.22%       1.791ms     127.938us           0 B           0 B           0 B           0 B            14
-                                           aten::linear         0.33%      66.834us         5.15%       1.029ms      48.989us       0.000us         0.00%       1.544ms      73.506us           0 B           0 B      53.38 MB           0 B            21
-                                            aten::addmm         3.10%     619.551us         3.95%     789.079us      37.575us       1.544ms        46.73%       1.544ms      73.506us           0 B           0 B      53.38 MB      53.38 MB            21
-autograd::engine::evaluate_function: GraphedBackward...         0.57%     113.346us         4.18%     834.546us     119.221us       0.000us         0.00%     557.302us      79.615us           0 B           0 B     -17.50 MB     -17.50 MB             7
-                                        GraphedBackward         2.19%     436.536us         3.53%     705.490us     100.784us     542.133us        16.41%     557.302us      79.615us           0 B           0 B           0 B           0 B             7
-                                                Graphed         1.57%     313.169us         3.56%     711.016us     101.574us     444.694us        13.46%     480.916us      68.702us           0 B           0 B           0 B           0 B             7
-void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us     448.441us        13.57%     448.441us      64.063us           0 B           0 B           0 B           0 B             7
+                             ## forward_pass_graphed ##         0.00%       0.000us         0.00%       0.000us       0.000us       3.626ms       109.36%       3.626ms     517.934us           0 B           0 B           0 B           0 B             7
+                                          ProfilerStep*         3.68%     730.731us        78.39%      15.555ms       2.222ms       0.000us         0.00%       2.259ms     322.729us           0 B           0 B           0 B           0 B             7
+                             ## forward_pass_graphed ##         8.58%       1.703ms        22.93%       4.549ms     649.839us       0.000us         0.00%       2.106ms     300.809us           0 B           0 B      69.56 MB     -88.38 MB             7
+void cutlass::Kernel2<cutlass_80_tensorop_s1688gemm_...         0.00%       0.000us         0.00%       0.000us       0.000us       1.793ms        54.08%       1.793ms     128.066us           0 B           0 B           0 B           0 B            14
+                                           aten::linear         0.38%      74.894us         5.74%       1.138ms      54.190us       0.000us         0.00%       1.545ms      73.556us           0 B           0 B      53.38 MB           0 B            21
+                                            aten::addmm         3.50%     694.782us         4.42%     876.082us      41.718us       1.545ms        46.59%       1.545ms      73.556us           0 B           0 B      53.38 MB      53.38 MB            21
+autograd::engine::evaluate_function: GraphedBackward...         0.58%     115.669us         4.10%     813.511us     116.216us       0.000us         0.00%     561.567us      80.224us           0 B           0 B     -17.50 MB     -17.50 MB             7
+                                        GraphedBackward         2.12%     420.204us         3.44%     681.689us      97.384us     546.366us        16.48%     561.567us      80.224us           0 B           0 B           0 B           0 B             7
+                                                Graphed         1.65%     327.433us         3.81%     756.580us     108.083us     444.992us        13.42%     481.505us      68.786us           0 B           0 B           0 B           0 B             7
+    autograd::engine::evaluate_function: AddmmBackward0         1.19%     235.448us         9.29%       1.844ms      87.803us       0.000us         0.00%     453.055us      21.574us           0 B           0 B      16.65 MB     -27.12 MB            21
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 19.958ms
-Self CUDA time total: 3.304ms
+Self CPU time total: 19.842ms
+Self CUDA time total: 3.315ms
 
 
 ======================================================================
 All profiling completed successfully!
 View traces in Chrome: chrome://tracing
-  - trace_without_make_graphed_callables.json
-  - trace_with_make_graphed_callables.json
-  - trace_with_partial_make_graphed_callables.json
+  - traces/trace_without_make_graphed_callables.json
+  - traces/trace_with_make_graphed_callables.json
+  - traces/trace_with_partial_make_graphed_callables.json
 ======================================================================
 ```
 
